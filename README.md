@@ -152,6 +152,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Skills Marketplace**: https://skills.sh
 - **Report Issues**: https://github.com/jpwang1208/find-skills-x/issues
 
+## 📝 Changelog
+
+### v4.0.0 (2026-04-02)
+- Initial public release
+- AI-powered skill discovery across 8+ platforms
+- Multi-channel search with 15+ sources
+- Support for Chinese and English documentation
+
 ---
 
 **Made with ❤️ by [jpwang1208](https://github.com/jpwang1208)**
