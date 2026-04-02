@@ -98,7 +98,6 @@ find-skills-x/
 │   │   ├── platforms.json  # Platform compatibility
 │   │   └── quality-assessment.md
 │   └── scripts/            # Helper scripts
-├── examples/               # Example skills (not for publishing)
 ├── README.md               # This file
 ├── README_CN.md            # Chinese documentation
 ├── LICENSE                 # MIT License

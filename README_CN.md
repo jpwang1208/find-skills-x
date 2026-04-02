@@ -98,7 +98,6 @@ find-skills-x/
 │   │   ├── platforms.json   # 平台兼容性
 │   │   └ quality-assessment.md
 │   └── scripts/             # 辅助脚本
-├── examples/                # 示例技能（不发布）
 ├── README.md                # 英文文档
 ├── README_CN.md             # 中文文档
 ├── LICENSE                  # MIT 许可证
