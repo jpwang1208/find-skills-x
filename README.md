@@ -96,9 +96,7 @@ find-skills-x/
 │   ├── SKILL.md            # Skill definition and workflow
 │   ├── evals/              # Evaluation tests
 │   ├── references/         # Configuration files
-│   │   ├── channels.json   # Search channels config
-│   │   ├── platforms.json  # Platform compatibility
-│   │   └── quality-assessment.md
+│   │   └── channels.json   # Search channels config
 │   └── scripts/            # Helper scripts
 ├── README.md               # This file
 ├── README_CN.md            # Chinese documentation
@@ -142,9 +140,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📚 Documentation
 
 - [Skill Workflow Documentation](skill/SKILL.md)
-- [Platform Compatibility Guide](skill/references/platforms.json)
 - [Search Channels Configuration](skill/references/channels.json)
-- [Quality Assessment Criteria](skill/references/quality-assessment.md)
 
 ## 🌐 Links
 

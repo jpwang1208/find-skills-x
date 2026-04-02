@@ -31,3 +31,6 @@ Temporary Items
 
 # Sisyphus working directory
 .sisyphus/
+
+# Evaluation and test outputs (process files)
+.evals/

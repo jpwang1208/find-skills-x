@@ -96,9 +96,7 @@ find-skills-x/
 │   ├── SKILL.md             # 技能定义和工作流程
 │   ├── evals/               # 评估测试
 │   ├── references/          # 配置参考
-│   │   ├── channels.json    # 搜索渠道配置
-│   │   ├── platforms.json   # 平台兼容性
-│   │   └ quality-assessment.md
+│   │   └── channels.json    # 搜索渠道配置
 │   └── scripts/             # 辅助脚本
 ├── README.md                # 英文文档
 ├── README_CN.md             # 中文文档
@@ -142,9 +140,7 @@ find-skills-x/
 ## 📚 文档链接
 
 - [技能工作流程详解](skill/SKILL.md)
-- [平台兼容性指南](skill/references/platforms.json)
 - [搜索渠道配置](skill/references/channels.json)
-- [质量评估标准](skill/references/quality-assessment.md)
 
 ## 🌐 相关链接
 
