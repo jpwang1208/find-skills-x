@@ -1,0 +1,124 @@
+{
+  "channels": [
+    {
+      "id": "skills-sh",
+      "name": "skills.sh",
+      "skills_count": "86000+",
+      "search_method": "API",
+      "api_endpoint": "https://skills.sh/api/search?q=<query>&limit=<n>",
+      "cli_command": "npx skills find <query>",
+      "priority": 1
+    },
+    {
+      "id": "skillsmp",
+      "name": "SkillsMP",
+      "skills_count": "71000+",
+      "search_method": "Web",
+      "url": "https://skillsmp.com",
+      "priority": 1
+    },
+    {
+      "id": "anthropic-skills",
+      "name": "Anthropic官方",
+      "skills_count": "50+",
+      "search_method": "GitHub",
+      "url": "https://github.com/anthropics/skills",
+      "priority": 1
+    },
+    {
+      "id": "clawhub",
+      "name": "ClawHub",
+      "skills_count": "50+",
+      "search_method": "CLI",
+      "url": "https://clawhub.ai",
+      "priority": 2
+    },
+    {
+      "id": "openclaw-directory",
+      "name": "OpenClaw Directory",
+      "skills_count": "精选",
+      "search_method": "Web",
+      "url": "https://open-claw.directory",
+      "priority": 2
+    },
+    {
+      "id": "tencent-skillhub",
+      "name": "腾讯SkillHub",
+      "skills_count": "25000+",
+      "search_method": "CLI",
+      "cli_command": "skillhub search <query>",
+      "priority": 1
+    },
+    {
+      "id": "minimax-skills",
+      "name": "MiniMax官方",
+      "search_method": "GitHub",
+      "url": "https://github.com/MiniMax-AI/skills",
+      "priority": 1
+    },
+    {
+      "id": "bytedance-skills",
+      "name": "字节跳动",
+      "search_method": "GitHub",
+      "url": "https://github.com/bytedance/skills",
+      "priority": 1
+    },
+    {
+      "id": "qwen-skills",
+      "name": "阿里Qwen",
+      "search_method": "GitHub",
+      "url": "https://github.com/QwenLM/qwen-skills",
+      "priority": 1
+    },
+    {
+      "id": "cocoloop",
+      "name": "CocoLoop",
+      "skills_count": "5000+",
+      "search_method": "Web",
+      "url": "https://hub.cocoloop.cn",
+      "priority": 1
+    },
+    {
+      "id": "openclaw-cn",
+      "name": "OpenClaw中国镜像",
+      "search_method": "Web",
+      "url": "https://openclaw.cn",
+      "priority": 2
+    },
+    {
+      "id": "github-topics",
+      "name": "GitHub Topics",
+      "search_method": "CLI",
+      "cli_command": "gh search repos --topic claude-skill",
+      "priority": 1
+    },
+    {
+      "id": "github-code-search",
+      "name": "GitHub Code Search",
+      "search_method": "CLI",
+      "cli_command": "gh search code 'SKILL.md' --filename SKILL.md",
+      "priority": 2
+    },
+    {
+      "id": "awesome-claude-skills",
+      "name": "Awesome Claude Skills",
+      "search_method": "Web",
+      "url": "https://github.com/poudel/awesome-claude-skills",
+      "priority": 1
+    },
+    {
+      "id": "awesome-claude-code",
+      "name": "Awesome Claude Code",
+      "search_method": "Web",
+      "url": "https://github.com/hesreallyhim/awesome-claude-code",
+      "priority": 1
+    },
+    {
+      "id": "safeskill-qianxin",
+      "name": "SafeSkill (奇安信)",
+      "search_method": "Web",
+      "url": "https://safeskill.qianxin.com",
+      "priority": 2
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "claude_code": {
+    "skills_dir": "~/.claude/skills/",
+    "config_file": "CLAUDE.md",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "skill在对话中自动触发"
+  },
+  "gemini_cli": {
+    "skills_dir": "~/.gemini/skills/",
+    "config_file": "GEMINI.md",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "通过GEMINI.md配置激活"
+  },
+  "cursor": {
+    "skills_dir": "~/.cursor/skills/",
+    "config_file": ".cursor/skills.json",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "在skills.json中配置"
+  },
+  "windsurf": {
+    "skills_dir": "~/.windsurf/skills/",
+    "config_file": ".windsurf/skills.json",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "在skills.json中配置"
+  },
+  "opencode": {
+    "skills_dir": "~/.config/opencode/skills/",
+    "config_file": "OPENCODE.md",
+    "install_command": "npx skills add {skill} -y",
+    "activation": "自动扫描skills目录"
+  },
+  "codex": {
+    "skills_dir": "~/.codex/skills/",
+    "config_file": "CODEX.md",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "通过CODEX.md配置"
+  },
+  "trae": {
+    "skills_dir": "~/.trae/skills/",
+    "config_file": ".trae/skills.json",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "在skills.json中配置"
+  },
+  "kiro": {
+    "skills_dir": "~/.kiro/skills/",
+    "config_file": "KIRO.md",
+    "install_command": "npx skills add {skill} -g -y",
+    "activation": "通过KIRO.md配置"
+  }
+}

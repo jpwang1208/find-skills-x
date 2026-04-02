@@ -1,0 +1,69 @@
+{
+  "test_cases": [
+    {
+      "id": "test-1",
+      "description": "搜索 React 相关技能",
+      "input": "react",
+      "expected": {
+        "min_results": 1,
+        "should_contain_channel": ["skills-sh", "skillsmp"],
+        "result_fields": ["name", "source", "installs"]
+      }
+    },
+    {
+      "id": "test-2", 
+      "description": "搜索 Android 开发技能",
+      "input": "android",
+      "expected": {
+        "min_results": 1,
+        "should_contain_channel": ["skills-sh", "tencent-skillhub"]
+      }
+    },
+    {
+      "id": "test-3",
+      "description": "搜索 Git 相关技能",
+      "input": "git",
+      "expected": {
+        "min_results": 1
+      }
+    },
+    {
+      "id": "test-4",
+      "description": "模糊搜索：跨平台App",
+      "input": "跨平台App",
+      "expected": {
+        "min_results": 0,
+        "note": "AI应推荐 Flutter/React Native 相关技能"
+      }
+    },
+    {
+      "id": "test-5",
+      "description": "多意图搜索：kotlin android 后端",
+      "input": "kotlin android 后端通信",
+      "expected": {
+        "min_results": 0,
+        "note": "AI应理解多意图并推荐相关技能"
+      }
+    }
+  ],
+  "channel_tests": [
+    {
+      "channel": "skills-sh",
+      "test": "API 搜索",
+      "command": "curl 'https://skills.sh/api/search?q=react&limit=5'",
+      "expected_status": 200
+    },
+    {
+      "channel": "tencent-skillhub",
+      "test": "CLI 可用性",
+      "command": "skillhub --version",
+      "expected": "已安装 或 提示安装"
+    },
+    {
+      "channel": "github-topics",
+      "test": "GitHub 搜索",
+      "command": "gh search repos 'react' --topic claude-skill --limit 3",
+      "expected": "JSON 输出"
+    }
+  ]
+}
