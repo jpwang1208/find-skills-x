@@ -44,6 +44,34 @@ compatibility:
 
 **目标**：从用户输入中提取最有效的搜索关键词。
 
+### 🎯 意图识别决策树
+
+```
+用户输入
+  ↓
+单一技术？ ("Java", "React", "Docker")
+  ├─ 是 → 提取核心词 + 领域扩展词
+  └─ 否 ↓
+
+技术+领域？ ("Java 后端", "React 移动端")
+  ├─ 是 → 拆分为: 技术 + 领域，并行搜索
+  └─ 否 ↓
+
+多关键词？ ("Kotlin Android 后端通信")
+  ├─ 是 → 提取所有关键词，并行搜索
+  └─ 否 → 单一意图，直接搜索
+
+最终: 合并去重 → 分类展示
+```
+
+### 📝 查询优化策略
+
+**重要规则**：
+1. **提取 ALL 关键词** - 不要只关注第一个词
+2. **领域词智能扩展** - "后端"→"backend"，"通信"→"communication"
+3. **并行独立搜索** - 每个核心关键词独立搜索
+4. **中英文转换** - 提供英文搜索词提高匹配率
+
 ### Prompt 模板
 
 ```
@@ -51,12 +79,17 @@ compatibility:
 
 用户输入: "{query}"
 
+**关键规则**：
+- 提取所有重要关键词，不要遗漏
+- 对领域词进行合理的英文转换
+- 每个核心关键词都独立有价值，需要分别搜索
+
 输出 JSON:
 {
-  "core": ["核心关键词"],
+  "core": ["所有核心关键词"],
   "expanded": {
-    "domain": ["领域扩展"],
-    "i18n": ["中英文扩展"]
+    "domain": ["技术/功能领域扩展"],
+    "i18n": ["中英文变体"]
   }
 }
 
@@ -65,7 +98,7 @@ compatibility:
 输出: {
   "core": ["authentication"],
   "expanded": {
-    "domain": ["auth", "login", "security","jwt", "oauth", "session", "token"],
+    "domain": ["auth", "login", "security", "jwt", "oauth", "session", "token"],
     "i18n": ["user authentication", "login"]
   }
 }
@@ -74,8 +107,26 @@ compatibility:
 输出: {
   "core": ["android"],
   "expanded": {
-    "domain": ["mobile", "kotlin", "java","jetpack", "compose"],
+    "domain": ["mobile", "kotlin", "java", "jetpack", "compose"],
     "i18n": ["android"]
+  }
+}
+
+输入: "Kotlin Android 后端通信"
+输出: {
+  "core": ["Kotlin", "Android", "backend", "communication", "API"],
+  "expanded": {
+    "domain": ["server", "networking", "microservice"],
+    "i18n": ["kotlin android", "backend communication"]
+  }
+}
+
+输入: "Python 数据分析 可视化"
+输出: {
+  "core": ["Python", "data-analysis", "visualization"],
+  "expanded": {
+    "domain": ["pandas", "matplotlib", "plotly", "data-science"],
+    "i18n": ["data analysis", "data visualization"]
   }
 }
 ```

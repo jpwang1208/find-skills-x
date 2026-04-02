@@ -2,68 +2,124 @@
   "test_cases": [
     {
       "id": "test-1",
-      "description": "搜索 React 相关技能",
+      "description": "单一技术搜索：React",
       "input": "react",
       "expected": {
-        "min_results": 1,
-        "should_contain_channel": ["skills-sh", "skillsmp"],
+        "min_results": 3,
+        "should_contain_skills": ["vercel-react-best-practices", "vercel-react-native-skills"],
+        "should_contain_channel": ["skills-sh"],
         "result_fields": ["name", "source", "installs"]
       }
     },
     {
       "id": "test-2", 
-      "description": "搜索 Android 开发技能",
+      "description": "单一技术搜索：Android 开发",
       "input": "android",
       "expected": {
-        "min_results": 1,
-        "should_contain_channel": ["skills-sh", "tencent-skillhub"]
+        "min_results": 5,
+        "should_contain_skills": ["mobile-android", "kotlin-android"],
+        "should_contain_channel": ["skills-sh"]
       }
     },
     {
       "id": "test-3",
-      "description": "搜索 Git 相关技能",
+      "description": "单一工具搜索：Git",
       "input": "git",
       "expected": {
-        "min_results": 1
+        "min_results": 3,
+        "should_contain_skills": ["git-commit", "git-workflow"]
       }
     },
     {
       "id": "test-4",
-      "description": "模糊搜索：跨平台App",
+      "description": "模糊意图搜索：跨平台App",
       "input": "跨平台App",
       "expected": {
-        "min_results": 0,
-        "note": "AI应推荐 Flutter/React Native 相关技能"
+        "min_results": 3,
+        "should_contain_skills": ["flutter", "react-native"],
+        "note": "AI 应推荐 Flutter/React Native 相关技能"
       }
     },
     {
       "id": "test-5",
-      "description": "多意图搜索：kotlin android 后端",
+      "description": "复合关键词搜索：Kotlin Android 后端通信",
       "input": "kotlin android 后端通信",
       "expected": {
-        "min_results": 0,
-        "note": "AI应理解多意图并推荐相关技能"
+        "min_results": 5,
+        "keywords_to_search": ["Kotlin", "Android", "backend", "communication", "API"],
+        "should_contain_skills": ["kotlin-springboot", "kotlin-android", "backend-api"],
+        "note": "AI 应提取所有关键词并并行搜索，返回分类结果"
+      }
+    },
+    {
+      "id": "test-6",
+      "description": "复合关键词搜索：Python 数据分析 可视化",
+      "input": "Python 数据分析 可视化",
+      "expected": {
+        "min_results": 5,
+        "keywords_to_search": ["Python", "data-analysis", "visualization", "pandas", "matplotlib"],
+        "should_contain_skills": ["python-data-analysis", "data-visualization"],
+        "note": "AI 应提取所有关键词并智能扩展领域词"
+      }
+    },
+    {
+      "id": "test-7",
+      "description": "领域词搜索：用户认证",
+      "input": "用户认证",
+      "expected": {
+        "min_results": 3,
+        "keywords_to_search": ["authentication", "auth", "login", "jwt", "oauth"],
+        "should_contain_skills": ["authentication", "auth-flow"]
+      }
+    },
+    {
+      "id": "test-8",
+      "description": "技术+领域组合：Java 后端",
+      "input": "Java 后端",
+      "expected": {
+        "min_results": 5,
+        "keywords_to_search": ["Java", "backend", "server", "springboot"],
+        "should_contain_skills": ["java-springboot", "spring-boot-engineer"],
+        "note": "AI 应拆分为技术和领域，分别搜索"
       }
     }
   ],
   "channel_tests": [
     {
       "channel": "skills-sh",
-      "test": "API 搜索",
-      "command": "curl 'https://skills.sh/api/search?q=react&limit=5'",
-      "expected_status": 200
+      "test": "API 可用性",
+      "command": "curl -s 'https://skills.sh/api/search?q=react&limit=1'",
+      "expected_status": 200,
+      "expected_fields": ["skills", "count"]
     },
     {
-      "channel": "tencent-skillhub",
-      "test": "CLI 可用性",
-      "command": "skillhub --version",
-      "expected": "已安装 或 提示安装"
+      "channel": "github",
+      "test": "GitHub CLI 可用性",
+      "command": "gh --version",
+      "expected": "gh version"
     },
     {
-      "channel": "github-topics",
-      "test": "GitHub 搜索",
-      "command": "gh search repos 'react' --topic claude-skill --limit 3",
-      "expected": "JSON 输出"
+      "channel": "skills-cli",
+      "test": "Skills CLI 可用性",
+      "command": "npx skills --version",
+      "expected": "skills"
+    }
+  ],
+  "keyword_extraction_tests": [
+    {
+      "input": "Kotlin Android 后端通信",
+      "expected_core": ["Kotlin", "Android", "backend", "communication", "API"],
+      "expected_expansion": ["server", "networking", "microservice"]
+    },
+    {
+      "input": "Python 数据分析 可视化",
+      "expected_core": ["Python", "data-analysis", "visualization"],
+      "expected_expansion": ["pandas", "matplotlib", "plotly", "data-science"]
+    },
+    {
+      "input": "用户认证",
+      "expected_core": ["authentication"],
+      "expected_expansion": ["auth", "login", "security", "jwt", "oauth"]
     }
   ]
 }
