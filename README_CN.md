@@ -1,5 +1,7 @@
 # Find Skills X 🎯
 
+**中文** | [English](README.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Supported Platforms](https://img.shields.io/badge/Platforms-8%20支持-blue.svg)](https://github.com/jpwang1208/find-skills-x)
 
