@@ -26,5 +26,5 @@ Temporary Items
 .vscode/
 .idea/
 
-# Sisyphus plans directory (working files)
-.sisyphus/plans/
+# Sisyphus working directory
+.sisyphus/
