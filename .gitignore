@@ -26,5 +26,8 @@ Temporary Items
 .vscode/
 .idea/
 
+# Claude Code local config (development)
+.claude/
+
 # Sisyphus working directory
 .sisyphus/
