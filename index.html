@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Skills X - AI驱动的技能聚合搜索引擎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-top: 20px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 40px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card .feature-icon {
+            font-size: 28px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 6px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            background: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 15px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .check {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #f44336;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Channels Section */
+        .channels {
+            background: white;
+            padding: 50px 0;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .channel-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .channel-count {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+
+        /* Platforms Section */
+        .platforms {
+            background: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+
+        .platform-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .platform-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .platform-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .install-code {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #95a5a6;
+            font-size: 14px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 40px 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .stats {
+                padding: 30px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .stat-item h3 {
+                font-size: 36px;
+            }
+
+            .features, .channels, .platforms {
+                padding: 40px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .feature-card {
+                page-break-inside: avoid;
+            }
+
+            .comparison {
+                padding: 40px 0;
+            }
+
+            .channels-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .platforms-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .cta {
+                padding: 40px 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .footer {
+                padding: 30px 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .btn {
+                border: 2px solid white;
+            }
+
+            /* Hide non-printable elements */
+            .print-hidden {
+                display: none !important;
+            }
+
+            /* Ensure colors print correctly */
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Page break control */
+            .page-break {
+                page-break-before: always;
+            }
+
+            /* Optimize for A4 */
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+        }
+
+        /* Screen only styles */
+        @media screen {
+            .print-button {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #667eea;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+                z-index: 1000;
+                transition: all 0.3s;
+            }
+
+            .print-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .stats-grid,
+            .features-grid,
+            .channels-grid,
+            .platforms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Print Button (Screen Only) -->
+    <button class="print-button print-hidden" onclick="window.print()">
+        📄 导出PDF
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🎯 Find Skills X</h1>
+            <p class="subtitle">AI驱动的技能聚合搜索引擎</p>
+            <p class="tagline">跨16+渠道并行搜索 · 智能关键词分析 · 官方技能优先 · 一键发现最佳Agent技能</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>16+</h3>
+                    <p>搜索渠道聚合</p>
+                </div>
+                <div class="stat-item">
+                    <h3>187K+</h3>
+                    <p>技能库总量</p>
+                </div>
+                <div class="stat-item">
+                    <h3>8+</h3>
+                    <p>支持Agent平台</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>测试成功率</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🧠</span> AI智能关键词分析</h3>
+                    <ul>
+                        <li><strong>意图识别决策树</strong>：自动识别单一技术、技术+领域、多关键词场景</li>
+                        <li><strong>领域词智能扩展</strong>：用户认证 → auth/jwt/oauth/login，提升300%覆盖率</li>
+                        <li><strong>中英文自动转换</strong>：支持中文输入，自动转换为英文搜索词</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🌐</span> 多渠道并行搜索</h3>
+                    <ul>
+                        <li><strong>16个渠道聚合</strong>：skills.sh (86K+)、腾讯SkillHub (25K+)、SkillsMP (71K+)</li>
+                        <li><strong>API > CLI > Web</strong>：自动选择最优搜索方式，提升效率</li>
+                        <li><strong>并行独立搜索</strong>：每个关键词独立搜索，提升结果多样性</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🏢</span> 官方技能优先</h3>
+                    <ul>
+                        <li><strong>大厂官方聚合</strong>：Anthropic、MiniMax、字节跳动、阿里Qwen官方技能库</li>
+                        <li><strong>智能识别优先</strong>：自动识别官方来源，优先展示官方认证技能</li>
+                        <li><strong>官方标识展示</strong>：🟢 官方认证标识，提升可信度</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🔄</span> 智能去重排序</h3>
+                    <ul>
+                        <li><strong>按name字段去重</strong>：避免重复结果，保留安装量最高的版本</li>
+                        <li><strong>多维度排序</strong>：官方认证 → 安装量 → 更新时间</li>
+                        <li><strong>分类展示</strong>：官方认证 / 社区推荐，清晰的结果分类</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🚀</span> 一键安装部署</h3>
+                    <ul>
+                        <li><strong>统一安装命令</strong>：<code>npx skills add {owner}/{repo}</code> 支持所有来源</li>
+                        <li><strong>多技能仓库支持</strong>：自动识别多技能仓库，提供完整安装路径</li>
+                        <li><strong>跨平台兼容</strong>：支持8+ Agent平台，自动适配配置</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><span class="feature-icon">📊</span> 质量评估体系</h3>
+                    <ul>
+                        <li><strong>安装量验证</strong>：优先推荐1K+安装量的技能，确保社区验证</li>
+                        <li><strong>来源可信度</strong>：官方组织 > 知名公司 > 活跃贡献者 > 普通用户</li>
+                        <li><strong>风险评估</strong>：自动检测低安装量、长期未更新等高风险信号</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">对比优势</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>功能对比</th>
+                            <th>find-skills</th>
+                            <th>find-skills-x</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>搜索渠道</strong></td>
+                            <td>1 个</td>
+                            <td><span class="check highlight">16+ 个</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI 关键词分析</strong></td>
+                            <td><span class="cross">❌ 无</span></td>
+                            <td><span class="check">✅ 智能分析</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>复合关键词支持</strong></td>
+                            <td><span class="cross">❌ 失败</span></td>
+                            <td><span class="check">✅ 成功率 100%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>中文支持</strong></td>
+                            <td><span class="cross">❌ 不支持</span></td>
+                            <td><span class="check">✅ 完全支持</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>官方技能发现</strong></td>
+                            <td><span class="cross">❌ 无</span></td>
+                            <td><span class="check">✅ 4+ 官方源</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>测试成功率</strong></td>
+                            <td>30%</td>
+                            <td><span class="check highlight">100%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>平均结果数量</strong></td>
+                            <td>6 个</td>
+                            <td><span class="check highlight">10+ 个</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>关键词扩展能力</strong></td>
+                            <td><span class="cross">❌ 无</span></td>
+                            <td><span class="check">✅ 3-5倍扩展</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Channels Section -->
+    <section class="channels">
+        <div class="container">
+            <h2 class="section-title">16+ 搜索渠道</h2>
+            <div class="channels-grid">
+                <div class="channel-card">
+                    <div class="channel-name">skills.sh</div>
+                    <div class="channel-count">86,000+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">SkillsMP</div>
+                    <div class="channel-count">71,000+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">腾讯 SkillHub</div>
+                    <div class="channel-count">25,000+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">CocoLoop</div>
+                    <div class="channel-count">5,000+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">Anthropic 官方</div>
+                    <div class="channel-count">50+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">MiniMax 官方</div>
+                    <div class="channel-count">官方</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">字节跳动官方</div>
+                    <div class="channel-count">官方</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">阿里 Qwen</div>
+                    <div class="channel-count">官方</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">GitHub Topics</div>
+                    <div class="channel-count">社区</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">GitHub Code</div>
+                    <div class="channel-count">社区</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">ClawHub</div>
+                    <div class="channel-count">50+</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-name">Awesome Lists</div>
+                    <div class="channel-count">精选</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms">
+        <div class="container">
+            <h2 class="section-title">支持 8+ Agent 平台</h2>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">🤖</div>
+                    <div class="platform-name">Claude Code</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">💻</div>
+                    <div class="platform-name">OpenCode</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🌟</div>
+                    <div class="platform-name">Gemini CLI</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">✨</div>
+                    <div class="platform-name">Cursor</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🌊</div>
+                    <div class="platform-name">Windsurf</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🚀</div>
+                    <div class="platform-name">Trae</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">⚡</div>
+                    <div class="platform-name">Kiro</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📝</div>
+                    <div class="platform-name">Codex</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>🚀 立即开始使用</h2>
+            <div class="install-code">
+                npx skills add jpwang1208/find-skills-x
+            </div>
+            <div class="cta-buttons">
+                <a href="https://github.com/jpwang1208/find-skills-x" class="btn btn-primary" target="_blank">
+                    <span>📖</span>
+                    <span>查看文档</span>
+                </a>
+                <a href="https://github.com/jpwang1208/find-skills-x" class="btn btn-secondary" target="_blank">
+                    <span>⭐</span>
+                    <span>GitHub 仓库</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/jpwang1208/find-skills-x">GitHub 仓库</a>
+                <a href="https://skills.sh">Skills.sh 市场</a>
+                <a href="https://github.com/jpwang1208/find-skills-x/issues">问题反馈</a>
+            </div>
+            <p class="copyright">
+                Made with ❤️ by <a href="https://github.com/jpwang1208" style="color: #667eea; text-decoration: none;">jpwang1208</a> · 
+                © 2026 Find Skills X · MIT License
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Auto-trigger print dialog on load (optional)
+        // Uncomment the line below if you want to auto-open print dialog
+        // window.addEventListener('load', () => window.print());
+    </script>
+</body>
+</html>
